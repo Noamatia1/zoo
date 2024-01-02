@@ -1,0 +1,32 @@
+<!-- index.html -->
+
+{% extends 'layout.html' %}
+
+{% block content %}
+    <h2>Animal List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Species</th>
+                <th>Photo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in animals %}
+                <tr>
+                    <td>{{ animal['name'] }}</td>
+                    <td>{{ animal['age'] }}</td>
+                    <td>{{ animal['species'] }}</td>
+                    <td><img src="{{ animal['photo_url'] }}" alt="{{ animal['name'] }}" class="img-thumbnail"></td>
+                    <td>
+                        <a href="{{ url_for('update_animal', id=animal['id']) }}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{{ url_for('delete_animal', id=animal['id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this animal?')">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
